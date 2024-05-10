@@ -53,4 +53,7 @@ private: // メンバ変数
 	/// </summary>
 	/// テクスチャハンドル
 	uint32_t textureHandle_ = 0;
+	//ビュープロダクション
+	//ViewProjection_.Initialize();
 };
+
