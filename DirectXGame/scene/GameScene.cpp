@@ -2,10 +2,19 @@
 #include "TextureManager.h"
 #include <cassert>
 
+
+
 GameScene::GameScene() {}
 
 GameScene::~GameScene() { 
-	delete sprite_; }
+	delete sprite_;
+	delete player_;
+}
+
+//GameScene::~GameScene() {
+//	delete 
+//}
+
 
 void GameScene::Initialize() {
 
@@ -17,9 +26,20 @@ void GameScene::Initialize() {
 	textureHandle_ = TextureManager::Load("mario.png");
 	//スプライトの生成
 	sprite_ = Sprite::Create(textureHandle_, {100, 50});
+
+	//ViewProjection_.Initialize;
+	player_=new Player();
+
+	player_->Initialize(model_,textureHandle_,&viewProjection_);
+
 }
 
 void GameScene::Update() {
+
+
+	player_->Update();
+
+
 	//スプライトの今の座標を取得
 	Vector2 position=sprite_->GetPosition();
 	//座標を{2,1}移動
@@ -59,6 +79,7 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
+	player_->Draw();
 
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
