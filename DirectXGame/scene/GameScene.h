@@ -56,12 +56,21 @@ private: // メンバ変数
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
 
-	Model* model_=nullptr;
-	ViewProjection viewProjection_;
+	//Model* model_=nullptr;
+	//ViewProjection viewProjection_;
 
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
 	/// テクスチャハンドル
 	uint32_t textureHandle_ = 0;
+
+	//3Dモデル
+	Model* model_=nullptr;
+
+	WorldTransform worldTransform_;
+
+	ViewProjection viewProjection_;
+
+
 };
