@@ -10,6 +10,7 @@
 #include "WorldTransform.h"
 
 #include"Player.h"
+#include<vector>
 
 /// <summary>
 /// ゲームシーン
@@ -21,6 +22,9 @@ class GameScene {
 
 	//自キャラ
 	Player*player_=nullptr;
+
+
+	std::vector<WorldTransform*>worldTransformBlocks_;
 
 	//	スプライト
 	Sprite* sprite_ = nullptr;
@@ -72,5 +76,7 @@ private: // メンバ変数
 
 	ViewProjection viewProjection_;
 
+	Model*block_=nullptr;
+	Model*modelBlock_=nullptr;
 
 };

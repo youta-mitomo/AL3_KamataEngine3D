@@ -10,6 +10,14 @@ GameScene::~GameScene() {
 	delete sprite_;
 	delete player_;
 	delete model_;
+	delete modelBlock_;
+
+	for (WorldTransform* worldTransformBlock : worldTransformBlocks_) {
+		delete worldTransformBlock;
+
+	}
+	worldTransformBlocks_.clear();
+
 }
 
 
@@ -24,6 +32,8 @@ void GameScene::Initialize() {
 	textureHandle_ = TextureManager::Load("mario.png");
 
 	model_=Model::Create();
+	modelBlock_=Model::Create();
+
 
 	worldTransform_.Initialize();
 
@@ -53,6 +63,15 @@ void GameScene::Update() {
 	position.y+=1.0f;
 	//移動した座標をスプライトに反映
 	sprite_->SetPosition(position);
+
+	for (WorldTransform* worldTransformBlock : worldTransformBlocks_) {
+
+		worldTransformBlock->matWorld_=
+
+		worldTransformBlock->TransferMatrix();
+	}
+
+
 
 
 }
