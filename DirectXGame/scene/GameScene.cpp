@@ -48,6 +48,34 @@ void GameScene::Initialize() {
 
 	player_->Initialize(model_,textureHandle_,&viewProjection_);
 
+	//要素数
+	const uint32_t kNumBlockHorizontal=20;
+
+	//ブロック1個分の横幅
+	const float kBlockWidth=2.0f;
+
+	//要素数を変更する
+	worldTransformBlocks_.resize(kNumBlockHorizontal);
+
+	//キューブの生成
+	for (uint32_t i = 0; i < kNumBlockHorizontal; ++i) {
+
+		worldTransformBlocks_[i]=new WorldTransform();
+		worldTransformBlocks_[i]->Initialize();
+		worldTransformBlocks_[i]->translation_.x=kBlockWidth*i;
+		worldTransformBlocks_[i]->translation_.y=0.0f;
+
+	}
+
+
+
+
+
+
+
+	
+
+
 }
 
 void GameScene::Update() {
@@ -64,10 +92,12 @@ void GameScene::Update() {
 	//移動した座標をスプライトに反映
 	sprite_->SetPosition(position);
 
+	//ブロックの更新
 	for (WorldTransform* worldTransformBlock : worldTransformBlocks_) {
 
-		worldTransformBlock->matWorld_=
+		worldTransformBlock->matWorld_=//Matrix4x4();
 
+		//定数バッファに転送する
 		worldTransformBlock->TransferMatrix();
 	}
 

@@ -23,7 +23,7 @@ class GameScene {
 	//自キャラ
 	Player*player_=nullptr;
 
-
+	//縦横ブロック配列
 	std::vector<WorldTransform*>worldTransformBlocks_;
 
 	//	スプライト
@@ -76,7 +76,9 @@ private: // メンバ変数
 
 	ViewProjection viewProjection_;
 
+	Model*model_=nullptr;
 	Model*block_=nullptr;
 	Model*modelBlock_=nullptr;
+
 
 };

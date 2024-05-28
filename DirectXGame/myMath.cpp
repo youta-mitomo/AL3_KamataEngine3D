@@ -3,8 +3,8 @@
 Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate) {
 
     Matrix4x4 result = Multiply(
-      Multiply(MakeRotateXMatrix(/*回転のX成分*/),MakeRotateYMatrix(/*回転のY成分*/)),
-               MakeRotateZMatrix(/*回転のZ成分*/));
+      Multiply(MakeRotateXMatrix(scale.x),MakeRotateYMatrix(translate.y)),
+               MakeRotateZMatrix(rotate.z));
 
     result.m[0][0] *= /*拡大縮小のX成分*/;
     result.m[0][1] *= /*拡大縮小のX成分*/;
