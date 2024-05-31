@@ -76,7 +76,7 @@ private: // メンバ変数
 
 	ViewProjection viewProjection_;
 
-	Model*model_=nullptr;
+	//Model*model_=nullptr;
 	Model*block_=nullptr;
 	Model*modelBlock_=nullptr;
 
