@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include "TextureManager.h"
 #include <cassert>
+#include"myMath.h"
 
 
 
@@ -13,11 +14,13 @@ GameScene::~GameScene() {
 	delete modelBlock_;
 
 	for (WorldTransform* worldTransformBlock : worldTransformBlocks_) {
+		//for(WorldTransform*worldTransformBlock:worldTransformBlockLine)
 		delete worldTransformBlock;
 
 	}
 	worldTransformBlocks_.clear();
 
+	//delete debugCamera_;
 }
 
 
@@ -95,13 +98,21 @@ void GameScene::Update() {
 	//ブロックの更新
 	for (WorldTransform* worldTransformBlock : worldTransformBlocks_) {
 
-		worldTransformBlock->matWorld_=//Matrix4x4();
+		worldTransformBlock->matWorld_=Matrix4x4();
 
 		//定数バッファに転送する
 		worldTransformBlock->TransferMatrix();
 	}
 
+	//for (std::vector<WorldTransform*> worldTransformBlockTate : worldTransformBlocks_) {
+	//	for (WorldTransform* worldTransformBlockYoko : worldTransformBlockTate) {
+	//		if (!worldTransformBlockYoko)
+	//			continue;
 
+	//		// アフィン変換行列の作成
+	//		worldTransformBlockYoko->UpdateMatrix();
+	//	}
+	//}
 
 
 }
