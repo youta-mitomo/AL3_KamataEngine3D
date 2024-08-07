@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Audio.h"
+#include "DebugCamera.h"
 #include "DirectXCommon.h"
 #include "Input.h"
 #include "Model.h"
@@ -8,7 +9,7 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
-
+#include "Skydome.h"
 #include"Player.h"
 #include<vector>
 
@@ -19,15 +20,6 @@ class GameScene {
 
 	//ビュープロダクション
 	
-
-	//自キャラ
-	Player*player_=nullptr;
-
-	//縦横ブロック配列
-	std::vector<WorldTransform*>worldTransformBlocks_;
-
-	//	スプライト
-	Sprite* sprite_ = nullptr;
 
 public: // メンバ関数
 	/// <summary>
@@ -60,9 +52,6 @@ private: // メンバ変数
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
 
-	//Model* model_=nullptr;
-	//ViewProjection viewProjection_;
-
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
@@ -71,14 +60,30 @@ private: // メンバ変数
 
 	//3Dモデル
 	Model* model_=nullptr;
+	//Model*block_=nullptr;
+	Model*modelBlock_=nullptr;
+	Model*modelSkydome_=nullptr;
 
 	WorldTransform worldTransform_;
 
 	ViewProjection viewProjection_;
 
-	//Model*model_=nullptr;
-	Model*block_=nullptr;
-	Model*modelBlock_=nullptr;
+
+	//自キャラ
+	Player*player_=nullptr;
+
+	//スカイドーム
+	Skydome* skydome_ = nullptr;
+
+	//縦横ブロック配列
+	std::vector<std::vector<WorldTransform*>> worldTransformBlocks_;
 
 
+
+	//	スプライト
+	Sprite* sprite_ = nullptr;
+
+	bool isDebugCameraActive_ = false;
+
+	DebugCamera* debugCamera_ = nullptr;
 };
