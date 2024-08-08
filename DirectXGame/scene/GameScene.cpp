@@ -32,14 +32,17 @@ void GameScene::Initialize() {
 	// 3Dモデルのロード
 	model_ = Model::Create();
 	modelBlock_ = Model::Create();
+
 	// ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
+
 	// ビュープロジェクションの初期化
 	viewProjection_.Initialize();
 
 	// 自キャラの生成
 	player_ = new Player();
 	// 自キャラの初期化
+	
 	// 座標をマップチップ番号で指定
 	Vector3 playerPosition = mapChipField_->GetMapChipPositionByIndex(2, 18);
 	player_->Initialize(playerPosition, &viewProjection_);
