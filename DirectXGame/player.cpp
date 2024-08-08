@@ -20,7 +20,7 @@ void Player::Initialize(const Vector3& position, ViewProjection* viewProjection)
 	worldTransform_.rotation_.y = std::numbers::pi_v<float> / 2.0f;
 
 	// 引数の内容をメンバ変数に記録
-	model_ = Model::CreateFromOBJ("player", true); //	textureHandle_ = textureHandle;
+	model_ = Model::CreateFromOBJ("player", true); 
 }
 
 void Player::Update() {
@@ -97,7 +97,6 @@ void Player::Update() {
 
 		if (Input::GetInstance()->PushKey(DIK_UP)) {
 			// ジャンプ初速
-			//			velocity_ += Vector3(0, kJumpAcceleration, 0);
 			velocity_.x += 0;
 			velocity_.y += kJumpAcceleration;
 			velocity_.z += 0;
@@ -105,7 +104,6 @@ void Player::Update() {
 
 	} else {
 		// 落下速度
-		//		velocity_ += Vector3(0, -kGravityAcceleration, 0);
 		velocity_.x += 0;
 		velocity_.y += -kGravityAcceleration;
 		velocity_.z += 0;
