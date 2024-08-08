@@ -3,17 +3,18 @@
 #include <vector>
 
 #include "Audio.h"
+#include "CameraController.h"
 #include "DebugCamera.h"
 #include "DirectXCommon.h"
 #include "Input.h"
+#include "MapChipField.h"
 #include "Model.h"
+#include "Player.h"
+#include "Skydome.h"
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
-#include "Player.h"
-#include "DebugCamera.h"
-#include "MapChipField.h"
-#include "CameraController.h"
+
 
 /// <summary>
 /// ゲームシーン
@@ -61,13 +62,16 @@ private: // メンバ変数
 	// 3Dモデル
 	Model* model_ = nullptr;
 	Model* modelBlock_ = nullptr;
+	Model* modelPlayer_ = nullptr;
 	// ワールドトランスフォーム
 	WorldTransform worldTransform_;
 	// ビュープロジェクション
 	ViewProjection viewProjection_;
 
+	// 自キャラ
 	Player* player_ = nullptr;
 
+	// 縦横ブロック配列
 	std::vector<std::vector<WorldTransform*>> worldTransformBlocks_;
 
 	// デバッグカメラ有効
@@ -75,11 +79,13 @@ private: // メンバ変数
 	// デバッグカメラ
 	DebugCamera* debugCamera_ = nullptr;
 
+	// 天球
+	Skydome* skydome_ = nullptr;
 	// 3Dモデル
 	Model* modelSkydome_ = nullptr;
 
 	// マップチップフィールド
-	MapChipField* mapChipField_;
+	MapChipField* mapChipField_ = nullptr;
 
 	CameraController* cameraController = nullptr;
 };

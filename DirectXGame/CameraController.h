@@ -1,7 +1,6 @@
-#pragma once
+﻿#include "ViewProjection.h"
 
-#include "ViewProjection.h"
-#include "myMath.h"
+//#include "Player.h"
 
 // 前方宣言
 class Player;
@@ -17,8 +16,11 @@ public:
 		float right = 1.0f;  // 右端
 		float bottom = 0.0f; // 下端
 		float top = 1.0f;    // 上端
-	};
 
+		
+
+	};
+        
 	/// <summary>
 	/// 初期化
 	/// </summary>
@@ -45,7 +47,7 @@ private:
 	Vector3 targetOffset_ = {0, 0, -30.0f};
 
 	// カメラ移動範囲
-	Rect movableArea_ = {0, 100, 0, 100};
+	Rect movableArea_ = {0, 300, 0, 300};
 	Vector3 destination_;
 	static inline const Rect targetMargin = {-9.0f, 9.0f, -5.0f, 5.0f};
 	static inline const float kInterpolationRate_ = 0.1f;
