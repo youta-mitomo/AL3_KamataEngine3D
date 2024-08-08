@@ -5,18 +5,24 @@
 // アフィン変換行列の作成
 Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rot, const Vector3& translate) {
 	Matrix4x4 ScallMat, RotateMat, RotateMatX, RotateMatY, RotateMatZ, TranslateMat, returnMat;
+
 	// スケール行列作成
 	ScallMat = {scale.x, 0, 0, 0, 0, scale.y, 0, 0, 0, 0, scale.z, 0, 0, 0, 0, 1};
+
 	// XYZ回転行列作成
 	RotateMatX = {1, 0, 0, 0, 0, cosf(rot.x), sinf(rot.x), 0, 0, -sinf(rot.x), cosf(rot.x), 0, 0, 0, 0, 1};
 	RotateMatY = {cosf(rot.y), 0, -sinf(rot.y), 0, 0, 1, 0, 0, sinf(rot.y), 0, cosf(rot.y), 0, 0, 0, 0, 1};
 	RotateMatZ = {cosf(rot.z), sinf(rot.z), 0, 0, -sinf(rot.z), cosf(rot.z), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+
 	// XYZ回転行列の合成(Z*X*Y)
 	RotateMat = Multiply(RotateMatZ, RotateMatX);
+
 	// ↑の結果＊Y軸回転
 	RotateMat = Multiply(RotateMat, RotateMatY);
+
 	// 平行移動行列作成
 	TranslateMat = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, translate.x, translate.y, translate.z, 1};
+
 	// スケール＊回転＊平行移動をワールド変換行列に
 	returnMat = Multiply(ScallMat, RotateMat);
 	returnMat = Multiply(returnMat, TranslateMat);
@@ -68,6 +74,7 @@ Matrix4x4 Multiply(const Matrix4x4& m1, const Matrix4x4& m2) {
 }
 
 Vector3& operator+=(Vector3& lhv, const Vector3& rhv) {
+
 	lhv.x += rhv.x;
 	lhv.y += rhv.y;
 	lhv.z += rhv.z;
@@ -75,6 +82,7 @@ Vector3& operator+=(Vector3& lhv, const Vector3& rhv) {
 }
 
 float EaseInOut(float x1, float x2, float t) {
+
 	float easedT = -(std::cosf(std::numbers::pi_v<float> * t) - 1.0f) / 2.0f;
 	return Lerp(x1, x2, easedT);
 }
@@ -89,6 +97,7 @@ const Vector3 operator+(const Vector3& v1, const Vector3& v2) {
 }
 
 Vector3& operator*=(Vector3& v, float s) { 
+
     v.x *= s;
 	v.y *= s;
 	v.z *= s;
@@ -96,6 +105,7 @@ Vector3& operator*=(Vector3& v, float s) {
 }
 
 const Vector3 operator*(const Vector3& v, float s) {
+
 	Vector3 temp(v);
 	return temp *= s;
 }
