@@ -31,7 +31,7 @@ void GameScene::Initialize() {
 
 	// 3Dモデルのロード
 	model_ = Model::Create();
-	modelBlock_ = Model::Create();
+	modelBlock_ = Model::CreateFromOBJ("block");
 
 	// ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
