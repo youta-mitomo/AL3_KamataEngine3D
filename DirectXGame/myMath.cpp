@@ -11,14 +11,14 @@ Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rot, const Vecto
 	RotateMatY = {cosf(rot.y), 0, -sinf(rot.y), 0, 0, 1, 0, 0, sinf(rot.y), 0, cosf(rot.y), 0, 0, 0, 0, 1};
 	RotateMatZ = {cosf(rot.z), sinf(rot.z), 0, 0, -sinf(rot.z), cosf(rot.z), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
 	// XYZ回転行列の合成(Z*X*Y)
-	RotateMat = MatrixMultiply(RotateMatZ, RotateMatX);
+	RotateMat = Multiply(RotateMatZ, RotateMatX);
 	// ↑の結果＊Y軸回転
-	RotateMat = MatrixMultiply(RotateMat, RotateMatY);
+	RotateMat = Multiply(RotateMat, RotateMatY);
 	// 平行移動行列作成
 	TranslateMat = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, translate.x, translate.y, translate.z, 1};
 	// スケール＊回転＊平行移動をワールド変換行列に
-	returnMat = MatrixMultiply(ScallMat, RotateMat);
-	returnMat = MatrixMultiply(returnMat, TranslateMat);
+	returnMat = Multiply(ScallMat, RotateMat);
+	returnMat = Multiply(returnMat, TranslateMat);
 
 	return returnMat;
 }
@@ -42,7 +42,7 @@ Matrix4x4 MakeRotateZMatrix(float radian) {
 	return {cosTheta, 0.0f, -sinTheta, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, sinTheta, 0.0f, cosTheta, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f};
 }
 
-Matrix4x4 MatrixMultiply(const Matrix4x4& m1, const Matrix4x4& m2) {
+Matrix4x4 Multiply(const Matrix4x4& m1, const Matrix4x4& m2) {
    
     Matrix4x4 result;
   
