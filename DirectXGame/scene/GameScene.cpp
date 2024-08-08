@@ -1,39 +1,27 @@
 #include "GameScene.h"
 #include "TextureManager.h"
 #include <cassert>
-#include"myMath.h"
-
-
 
 GameScene::GameScene() {}
 
-GameScene::~GameScene() { 
-	delete sprite_;
-	delete player_;
+GameScene::~GameScene() {
+	
+	
 	delete model_;
-	//delete modelBlock_;
+	delete modelBlock_;
+	delete modelSkydome_;
 
 	for (std::vector<WorldTransform*>& worldTransformBlockLine : worldTransformBlocks_) {
 		for (WorldTransform* worldTransformBlock : worldTransformBlockLine) {
+
 			delete worldTransformBlock;
 		}
 	}
+
 	worldTransformBlocks_.clear();
 
-	delete player_;
-
-	delete modelSkydome_;
-
-	delete skydome_;
-
 	delete debugCamera_;
-
-
-
-	//delete debugCamera_;
 }
-
-
 
 void GameScene::Initialize() {
 
@@ -41,45 +29,30 @@ void GameScene::Initialize() {
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
-	//ファイル名を指定してテクスチャを読み込む
-	textureHandle_ = TextureManager::Load("mario.png");
+	// 3Dモデルのロード
+	model_ = Model::Create();
+	modelBlock_ = Model::Create();
+	modelSkydome_ = Model::CreateFromOBJ("sphere", true);
 
-	model_=Model::Create();
-	modelBlock_=Model::Create();
-
-
-	worldTransform_.Initialize();
-
+	//textureHandel_ = TextureManager::Load("mario.jpg");
 
 	viewProjection_.Initialize();
+	worldTransform_.Initialize();
 
-	//スプライトの生成
-	sprite_ = Sprite::Create(textureHandle_, {100, 50});
+	
 
-	//ViewProjection_.Initialize;
-	player_=new Player();
-
-	player_->Initialize(model_,textureHandle_,&viewProjection_);
-
-	//要素数
+	// 要数数
+	const uint32_t kNumBlockHorizontal = 20;
 	const uint32_t kNumBlockVirtical = 10;
-	const uint32_t kNumBlockHorizontal=20;
-
-	//ブロック1個分の横幅
-	const float kBlockWidth=2.0f;
+	// プロック１個分の横幅
+	const float kBlockWidth = 2.0f;
 	const float kBlockHeight = 2.0f;
 
-	//要素数を変更する
+	// 要数数を変更する
 	worldTransformBlocks_.resize(kNumBlockVirtical);
 
-	//キューブの生成
-	for (uint32_t i = 0; i < kNumBlockVirtical; ++i) {
-
+	for (uint32_t i = 0; i < kNumBlockVirtical; i++) {
 		worldTransformBlocks_[i].resize(kNumBlockHorizontal);
-		//worldTransformBlocks_[i]->Initialize();
-		//worldTransformBlocks_[i]->translation_.x=kBlockWidth*i;
-		//worldTransformBlocks_[i]->translation_.y=0.0f;
-
 	}
 
 	for (uint32_t i = 0; i < kNumBlockVirtical; ++i) {
@@ -95,50 +68,27 @@ void GameScene::Initialize() {
 		}
 	}
 
-
 	// デバッグカメラの生成
 	debugCamera_ = new DebugCamera(1280, 720);
-
+}
+void GameScene::Update() {
 
 	
 
+	// カメラ処理
+	if (isDebugCameraActive_) {
+		// デバッグカメラの更新
+		debugCamera_->Update();
+		viewProjection_.matView = debugCamera_->GetViewProjection().matView;
+		viewProjection_.matProjection = debugCamera_->GetViewProjection().matProjection;
+		// ビュープロジェクション行列の転送
+		viewProjection_.TransferMatrix();
+	} else {
+		// ビュープロジェクション行列の更新と転送
+		viewProjection_.UpdateMatrix();
+	}
 
-}
-
-void GameScene::Update() {
-
-
-	player_->Update();
-
-
-	//スプライトの今の座標を取得
-	Vector2 position=sprite_->GetPosition();
-	//座標を{2,1}移動
-	position.x+=2.0f;
-	position.y+=1.0f;
-	//移動した座標をスプライトに反映
-	sprite_->SetPosition(position);
-
-	//ブロックの更新
-	//for (WorldTransform* worldTransformBlock : worldTransformBlocks_) {
-
-	//	worldTransformBlock->matWorld_=Matrix4x4();
-
-	//	//定数バッファに転送する
-	//	worldTransformBlock->TransferMatrix();
-	//}
-
-	//for (std::vector<WorldTransform*> worldTransformBlockTate : worldTransformBlocks_) {
-	//	for (WorldTransform* worldTransformBlockYoko : worldTransformBlockTate) {
-	//		if (!worldTransformBlockYoko)
-	//			continue;
-
-	//		// アフィン変換行列の作成
-	//		worldTransformBlockYoko->UpdateMatrix();
-	//	}
-	//}
-
-	//縦横ブロック更新
+	// 縦横ブロック更新
 	for (std::vector<WorldTransform*> worldTransformBlockTate : worldTransformBlocks_) {
 		for (WorldTransform* worldTransformBlockYoko : worldTransformBlockTate) {
 			if (!worldTransformBlockYoko)
@@ -149,8 +99,6 @@ void GameScene::Update() {
 		}
 	}
 
-
-
 	#ifdef _DEBUG
 	if (input_->TriggerKey(DIK_SPACE)) {
 		if (isDebugCameraActive_ == true)
@@ -159,19 +107,9 @@ void GameScene::Update() {
 			isDebugCameraActive_ = true;
 	}
 #endif
-
-
-
-
-
-
-
-
-
 }
 
 void GameScene::Draw() {
-
 	// コマンドリストの取得
 	ID3D12GraphicsCommandList* commandList = dxCommon_->GetCommandList();
 
@@ -182,8 +120,6 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
-	sprite_->Draw();
-
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
@@ -198,8 +134,8 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
-	player_->Draw();
 
+	//player_->Draw();
 
 	for (std::vector<WorldTransform*> worldTransformBlockTate : worldTransformBlocks_) {
 		for (WorldTransform* worldTransformBlockYoko : worldTransformBlockTate) {
