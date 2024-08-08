@@ -13,6 +13,7 @@ void Player::Initialize(const Vector3& position, ViewProjection* viewProjection)
 	worldTransform_.Initialize();
 	worldTransform_.translation_ = position;
 
+
 	viewProjection_ = viewProjection;
 
 	// 右を向かせる(πとか数値情報が定義されてる)
@@ -114,6 +115,7 @@ void Player::Update() {
 		// 着地フラグ
 		landing = false;
 
+
 		// 地面との当たり判定
 		// 下降中？
 		if (velocity_.y < 0) {
@@ -157,7 +159,6 @@ void Player::Update() {
 }
 
 void Player::Draw() {
-
 	// 3Dモデルを描画
 	model_->Draw(worldTransform_, *viewProjection_);
 }
