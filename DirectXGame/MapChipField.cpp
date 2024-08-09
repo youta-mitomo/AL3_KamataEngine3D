@@ -37,7 +37,6 @@ void MapChipField::LoadMapChipCsv(const std::string& filePath) {
 	mapChipCsv << file.rdbuf();
 	// ファイルを閉じる
 	file.close();
-
 	// マップチップデータをリセット
 	ResetMapChipData();
 
@@ -67,11 +66,9 @@ Vector3 MapChipField::GetMapChipPositionByIndex(uint32_t xIndex, uint32_t yIndex
 
 MapChipType MapChipField::GetMapChipTypeByIndex(uint32_t xIndex, uint32_t yIndex) {
 	if (xIndex < 0 || kNumBlockHorizontal - 1 < xIndex) {
-
 		return MapChipType::kBlank;
 	}
 	if (yIndex < 0 || kNumBlockVirtical - 1 < yIndex) {
-
 		return MapChipType::kBlank;
 	}
 
