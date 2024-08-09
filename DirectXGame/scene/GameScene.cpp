@@ -61,7 +61,7 @@ void GameScene::Initialize() {
 	debugCamera_ = new DebugCamera(1280, 720);
 
 	mapChipField_ = new MapChipField;
-	mapChipField_->LoadMapChipCsv("Resources/map.csv");
+	mapChipField_->LoadMapChipCsv("Resources/blocks.csv");
 
 	player_->SetMapChipField(mapChipField_);
 
