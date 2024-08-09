@@ -11,6 +11,7 @@
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	WinApp* win = nullptr;
 	DirectXCommon* dxCommon = nullptr;
+
 	// 汎用機能
 	Input* input = nullptr;
 	Audio* audio = nullptr;
@@ -20,7 +21,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// ゲームウィンドウの作成
 	win = WinApp::GetInstance();
-	win->CreateGameWindow(L"GC2D_04_キタムラ_ケンタ_AL3");
+	win->CreateGameWindow(L"GC2D_10_ミトモ_ヨウタ_AL3");
 
 	// DirectX初期化処理
 	dxCommon = DirectXCommon::GetInstance();
