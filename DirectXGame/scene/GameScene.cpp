@@ -31,7 +31,7 @@ void GameScene::Initialize() {
 
 	// 3Dモデルのロード
 	model_ = Model::Create();
-	modelBlock_ = Model::CreateFromOBJ("block");
+	modelBlock_ = Model::Create();
 
 	// ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
@@ -41,7 +41,6 @@ void GameScene::Initialize() {
 
 	// 自キャラの生成
 	player_ = new Player();
-	// 自キャラの初期化
 	
 	// 座標をマップチップ番号で指定
 	Vector3 playerPosition = mapChipField_->GetMapChipPositionByIndex(2, 18);
@@ -62,6 +61,7 @@ void GameScene::Initialize() {
 	cameraController->Initialize();
 	cameraController->SetTarget(player_);
 	cameraController->Reset();
+
 
 	CameraController::Rect cameraArea = {12.0f, 100 - 12.0f, 6.0f, 6.0f};
 	cameraController->SetMovableArea(cameraArea);
@@ -117,6 +117,7 @@ void GameScene::Update() {
 }
 
 void GameScene::Draw() {
+
 	// コマンドリストの取得
 	ID3D12GraphicsCommandList* commandList = dxCommon_->GetCommandList();
 
@@ -146,9 +147,9 @@ void GameScene::Draw() {
 	player_->Draw();
 
 	// 天球の描画
-	//skydome_->Draw();
 	modelSkydome_->Draw(worldTransform_, viewProjection_);
 
+	//縦横ブロック描画
 	for (std::vector<WorldTransform*> worldTransformBlockTate : worldTransformBlocks_) {
 		for (WorldTransform* worldTransformBlockYoko : worldTransformBlockTate) {
 			if (!worldTransformBlockYoko)

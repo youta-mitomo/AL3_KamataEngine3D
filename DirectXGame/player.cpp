@@ -152,6 +152,7 @@ void Player::Update() {
 
 	// 行列計算
 	worldTransform_.UpdateMatrix();
+
 	// 行列を定数バッファに転送
 	worldTransform_.TransferMatrix();
 }
