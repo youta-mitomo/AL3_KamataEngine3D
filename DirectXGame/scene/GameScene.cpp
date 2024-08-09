@@ -218,6 +218,8 @@ void GameScene::GenerateBlocks() {
 				worldTransformBlocks_[i][j]->translation_ =
 				    mapChipField_->GetMapChipPositionByIndex(j, i);
 			}
+					
+
 		}
 	}
 }
