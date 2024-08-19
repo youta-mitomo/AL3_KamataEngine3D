@@ -425,6 +425,7 @@ void Player::AnimateTurn() {
 	}
 }
 
+
 Vector3 Player::CornerPosition(const Vector3& center, Corner corner) {
 
 	Vector3 offsetTable[] = {
