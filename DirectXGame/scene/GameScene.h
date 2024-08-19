@@ -59,12 +59,15 @@ private: // メンバ変数
 	/// </summary>
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0;
+
 	// 3Dモデル
 	Model* model_ = nullptr;
 	Model* modelBlock_ = nullptr;
 	Model* modelPlayer_ = nullptr;
+
 	// ワールドトランスフォーム
 	WorldTransform worldTransform_;
+
 	// ビュープロジェクション
 	ViewProjection viewProjection_;
 
@@ -81,6 +84,7 @@ private: // メンバ変数
 
 	// 天球
 	Skydome* skydome_ = nullptr;
+
 	// 3Dモデル
 	Model* modelSkydome_ = nullptr;
 

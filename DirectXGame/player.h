@@ -13,6 +13,7 @@ class Player {
 public:
 	// 左右
 	enum class LRDirection {
+
 		kRight,
 		kLeft,
 	};
@@ -23,7 +24,6 @@ public:
 		kLeftBottom,  // 左下
 		kRightTop,    // 右上
 		kLeftTop,     // 左上
-
 		kNumCorner // 要素数
 	};
 

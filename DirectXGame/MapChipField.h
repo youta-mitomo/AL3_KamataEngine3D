@@ -31,7 +31,6 @@ public:
 	};
 
 	void ResetMapChipData();
-
 	void LoadMapChipCsv(const std::string& filePath);
 
 	Vector3 GetMapChipPositionByIndex(uint32_t xIndex, uint32_t yIndex);
