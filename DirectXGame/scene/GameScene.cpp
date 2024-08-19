@@ -25,6 +25,7 @@ GameScene::~GameScene() {
 	delete mapChipField_;
 
 	delete cameraController;
+	delete modelEnemy_;
 }
 
 void GameScene::Initialize() {
@@ -33,11 +34,13 @@ void GameScene::Initialize() {
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
-	
+	// ファイル名を指定してテクスチャを読み込む
+
 	// 3Dモデルの生成
-//	model_ = Model::Create();
 	modelBlock_ = Model::CreateFromOBJ("block");
 	modelPlayer_ = Model::CreateFromOBJ("player");
+	modelEnemy_ = Model::CreateFromOBJ("enemy");
+	modelSkydome_ = Model::CreateFromOBJ("sphere", true);
 	// ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
 	// ビュープロジェクションの初期化
@@ -52,8 +55,6 @@ void GameScene::Initialize() {
 
 	// 天球の生成
 	skydome_ = new Skydome();
-	// 天球3Dモデルの生成
-	modelSkydome_ = Model::CreateFromOBJ("sphere", true);
 	// 天球の初期化
 	skydome_->Initialize(modelSkydome_, &viewProjection_);
 
@@ -74,9 +75,42 @@ void GameScene::Initialize() {
 
 	CameraController::Rect cameraArea = {12.0f, 100 - 12.0f, 6.0f, 6.0f};
 	cameraController->SetMovableArea(cameraArea);
+
+	//敵の生成
+	enemy_ = new Enemy();
+	
+	Vector3 enemyPosition = mapChipField_->GetMapChipPositionByIndex(5,18);
+	//敵の初期化
+	enemy_->Initialize(modelEnemy_, enemyPosition, &viewProjection_);
+	
 }
 
+void GameScene::GenerateBlocks() {
 
+	// 要素数
+	uint32_t numBlockVirtical = mapChipField_->GetNumBlockVirtical();
+	uint32_t numBlockHorizontal = mapChipField_->GetNumBlockHorizontal();
+
+	// 要素数を変更する
+	worldTransformBlocks_.resize(numBlockVirtical);
+
+	// キューブの生成
+	for (uint32_t i = 0; i < numBlockVirtical; ++i) {
+		worldTransformBlocks_[i].resize(numBlockHorizontal);
+	}
+
+	for (uint32_t i = 0; i < numBlockVirtical; ++i) {
+		for (uint32_t j = 0; j < numBlockHorizontal; ++j) {
+			if (mapChipField_->GetMapChipTypeByIndex(j, i) == MapChipType::kBlock) {
+				WorldTransform* worldTransform = new WorldTransform();
+				worldTransform->Initialize();
+				worldTransformBlocks_[i][j] = worldTransform;
+				worldTransformBlocks_[i][j]->translation_ =
+				    mapChipField_->GetMapChipPositionByIndex(j, i);
+			}
+		}
+	}
+}
 
 void GameScene::Update() {
 
@@ -113,6 +147,9 @@ void GameScene::Update() {
 
 	// 天球の更新
 	skydome_->Update();
+
+	//敵の更新
+	enemy_->Update();
 
 	// 縦横ブロック更新
 	for (std::vector<WorldTransform*> worldTransformBlockTate : worldTransformBlocks_) {
@@ -159,12 +196,15 @@ void GameScene::Draw() {
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
 	// 3Dモデル描画
-	//	model_->Draw(worldTransform_, viewProjection_, textureHandle_);
+	
 	// 自キャラの描画
 	player_->Draw();
 
 	// 天球の描画
 	skydome_->Draw();
+
+	//敵の描画
+	enemy_->Draw();
 
 	// 縦横ブロック描画
 	for (std::vector<WorldTransform*> worldTransformBlockTate : worldTransformBlocks_) {
@@ -191,36 +231,5 @@ void GameScene::Draw() {
 	// スプライト描画後処理
 	Sprite::PostDraw();
 
-
-
 #pragma endregion
-
-
-}
-
-void GameScene::GenerateBlocks() {
-
-	// 要素数
-	uint32_t numBlockVirtical = mapChipField_->GetNumBlockVirtical();
-	uint32_t numBlockHorizontal = mapChipField_->GetNumBlockHorizontal();
-
-	// 要素数を変更する
-	worldTransformBlocks_.resize(numBlockVirtical);
-
-	// キューブの生成
-	for (uint32_t i = 0; i < numBlockVirtical; ++i) {
-		worldTransformBlocks_[i].resize(numBlockHorizontal);
-	}
-
-	for (uint32_t i = 0; i < numBlockVirtical; ++i) {
-		for (uint32_t j = 0; j < numBlockHorizontal; ++j) {
-			if (mapChipField_->GetMapChipTypeByIndex(j, i) == MapChipType::kBlock) {
-				WorldTransform* worldTransform = new WorldTransform();
-				worldTransform->Initialize();
-				worldTransformBlocks_[i][j] = worldTransform;
-				worldTransformBlocks_[i][j]->translation_ =
-				    mapChipField_->GetMapChipPositionByIndex(j, i);
-			}
-		}
-	}
 }

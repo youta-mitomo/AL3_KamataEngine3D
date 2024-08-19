@@ -3,7 +3,6 @@
 #include "Model.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
-
 class MapChipField;
 
 /// <summary>
@@ -13,7 +12,6 @@ class Player {
 public:
 	// 左右
 	enum class LRDirection {
-
 		kRight,
 		kLeft,
 	};
@@ -24,6 +22,7 @@ public:
 		kLeftBottom,  // 左下
 		kRightTop,    // 右上
 		kLeftTop,     // 左上
+
 		kNumCorner // 要素数
 	};
 
@@ -40,7 +39,7 @@ public:
 
 	/// <summary>
 	/// 描画
-	/// </summary>
+
 	void Draw();
 
 	// setter
@@ -64,6 +63,7 @@ private:
 	static inline const float kHeight = 0.8f;
 	static inline const float kBlank = 0.04f;
 	static inline const float kGroundSearchHeight = 0.06f;
+	
 
 	// マップとの当たり判定情報
 	struct CollisionMapInfo {

@@ -1,5 +1,4 @@
 ﻿#define NOMINMAX
-
 #include "Player.h"
 #include "DirectxCommon.h"
 #include "DebugText.h"
