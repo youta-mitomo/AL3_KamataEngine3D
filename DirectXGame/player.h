@@ -13,17 +13,18 @@ class Player {
 public:
 	// 左右
 	enum class LRDirection {
+
 		kRight,
 		kLeft,
 	};
 
 	// 角
 	enum Corner {
+
 		kRightBottom, // 右下
 		kLeftBottom,  // 左下
 		kRightTop,    // 右上
 		kLeftTop,     // 左上
-
 		kNumCorner // 要素数
 	};
 
@@ -75,6 +76,7 @@ private:
 
 	// モデル
 	Model* model_ = nullptr;
+
 	// ワールド変換データ
 	WorldTransform worldTransform_;
 	ViewProjection* viewProjection_ = nullptr;

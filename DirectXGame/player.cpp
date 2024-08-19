@@ -112,8 +112,10 @@ void Player::InputMove() {
 			}
 			// 加速/減速
 			velocity_ += acceleration;
+
 			// 最大速度制限
 			velocity_.x = std::clamp(velocity_.x, -kLimitRunSpeed, kLimitRunSpeed);
+
 		} else {
 			// 非入力時は移動減衰をかける
 			velocity_.x *= (1.0f - kAttenuation);
@@ -346,6 +348,7 @@ void Player::CheckMapCollisionLeft(CollisionMapInfo& info) {
 		MapChipField::IndexSet indexSetNow;
 		indexSetNow = mapChipField_->GetMapChipIndexSetByPosition(
 		    worldTransform_.translation_ + Vector3(-kWidth / 2.0f, 0, 0));
+
 		if (indexSetNow.xIndex != indexSet.xIndex) {
 			// めり込みを排除する方向に移動量を設定する
 			indexSet = mapChipField_->GetMapChipIndexSetByPosition(
