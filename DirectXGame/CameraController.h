@@ -9,6 +9,7 @@ class Player;
 /// </summary>
 class CameraController {
 
+
 public:
 	// 矩形
 	struct Rect {

@@ -1,7 +1,6 @@
 ﻿#define NOMINMAX
 
 #include "Player.h"
-#include "DirectxCommon.h"
 #include "DebugText.h"
 #include "Easing.h"
 #include "Input.h"
@@ -19,14 +18,11 @@ void Player::Initialize(Model* model, ViewProjection* viewProjection, const Vect
 	// ワールド変換の初期化
 	worldTransform_.Initialize();
 	worldTransform_.translation_ = position;
-
 	// 右を向かせる(πとか数値情報が定義されてる)
 	worldTransform_.rotation_.y = std::numbers::pi_v<float> / 2.0f;
 
 	viewProjection_ = viewProjection;
 }
-
-
 
 void Player::Update() {
 
@@ -49,7 +45,7 @@ void Player::Update() {
 	if (collisionMapInfo.ceiling) {
 		velocity_.y = 0;
 	}
-	//壁接触よる減速
+	//
 	if (collisionMapInfo.hitWall) {
 		velocity_.x *= (1.0f - kAttenuationWall);
 	}
@@ -68,6 +64,34 @@ void Player::Draw() {
 
 	// 3Dモデルを描画
 	model_->Draw(worldTransform_, *viewProjection_);
+}
+
+Vector3 Player::GetWorldPosition() {
+	Vector3 worldPos;
+	// ワールド行列の平行移動成分を取得(ワールド座標)
+	worldPos.x = worldTransform_.matWorld_.m[3][0];
+	worldPos.y = worldTransform_.matWorld_.m[3][1];
+	worldPos.z = worldTransform_.matWorld_.m[3][2];
+	return worldPos;
+}
+
+AABB Player::GetAABB() {
+	Vector3 worldPos = GetWorldPosition();
+
+	AABB aabb;
+
+	aabb.min = {
+	    worldPos.x - kWidth / 2.0f, worldPos.y - kHeight / 2.0f, worldPos.z - kWidth / 2.0f};
+	aabb.max = {
+	    worldPos.x + kWidth / 2.0f, worldPos.y + kHeight / 2.0f, worldPos.z + kWidth / 2.0f};
+
+	return aabb;
+}
+
+void Player::OnCollision(const Enemy* enemy) {
+	(void)enemy;
+	// ジャンプ初速
+	velocity_ += Vector3(0, kJumpAcceleration / 60.0f, 0);
 }
 
 void Player::InputMove() {
@@ -314,6 +338,7 @@ void Player::CheckMapCollisionLeft(CollisionMapInfo& info) {
 	MapChipType mapChipType;
 	MapChipType mapChipTypeNext;
 	bool hit = false;
+
 	// 左上点の判定
 	MapChipField::IndexSet indexSet;
 	indexSet = mapChipField_->GetMapChipIndexSetByPosition(positionsNew[kLeftTop]);
@@ -322,6 +347,7 @@ void Player::CheckMapCollisionLeft(CollisionMapInfo& info) {
 	if (mapChipType == MapChipType::kBlock && mapChipTypeNext != MapChipType::kBlock) {
 		hit = true;
 	}
+
 	// 左下点の判定
 	indexSet = mapChipField_->GetMapChipIndexSetByPosition(positionsNew[kLeftBottom]);
 	mapChipType = mapChipField_->GetMapChipTypeByIndex(indexSet.xIndex, indexSet.yIndex);
@@ -389,7 +415,6 @@ void Player::UpdateOnGround(const CollisionMapInfo& info) {
 			}
 		}
 	} else {
-		//着地
 		if (info.landing) {
 			velocity_.x *= (1.0f - kAttenuationLanding);
 			velocity_.y = 0.0f;
