@@ -1,9 +1,10 @@
 ﻿#pragma once
 
-
 #include "Model.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+
+class Player;
 
 class Enemy {
 	

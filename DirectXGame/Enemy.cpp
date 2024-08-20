@@ -3,9 +3,6 @@
 #include <cassert>
 #include <numbers>
 
-
-
-
 void Enemy::Initialize(Model* model, const Vector3& position, ViewProjection* viewProjection) {
 
 	worldTransform_.Initialize();
@@ -23,9 +20,8 @@ void Enemy::Initialize(Model* model, const Vector3& position, ViewProjection* vi
 }
 
 void Enemy::Update() {
-	//敵の移動
+	
 	worldTransform_.translation_.x += velocity_.x;
-
 
 	worldTransform_.UpdateMatrix(); 
 
@@ -33,12 +29,9 @@ void Enemy::Update() {
 
 	worldTransform_.rotation_.x =
 	    std::sin(std::numbers::pi_v<float> * 2.0f * walkTimer_ / kWalkMotionTime);
-
-
-
 }
 
 void Enemy::Draw() {
-	// 3Dモデル描画
+	
 	model_->Draw(worldTransform_, *viewProjection_);
 }
