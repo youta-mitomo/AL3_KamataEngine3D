@@ -33,7 +33,7 @@ void Enemy::Update() {
 
 void Enemy::Draw() {
 	// モデル描画
-	
+
 	model_->Draw(worldTransform_, *viewProjection_);
 }
 
@@ -53,7 +53,7 @@ AABB Enemy::GetAABB() {
 
 	aabb.min = {
 	    worldPos.x - kWidth / 2.0f, worldPos.y - kHeight / 2.0f, worldPos.z - kWidth / 2.0f};
-
+	
 	aabb.max = {
 	    worldPos.x + kWidth / 2.0f, worldPos.y + kHeight / 2.0f, worldPos.z + kWidth / 2.0f};
 

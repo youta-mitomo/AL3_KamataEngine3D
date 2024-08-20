@@ -35,7 +35,6 @@ void Player::Update() {
 	collisionMapInfo.landing = false;
 	collisionMapInfo.hitWall = false;
 
-	//マップ衝突判定
 	CheckMapCollision(collisionMapInfo);
 
 	// 移動
@@ -45,7 +44,6 @@ void Player::Update() {
 	if (collisionMapInfo.ceiling) {
 		velocity_.y = 0;
 	}
-	//
 	if (collisionMapInfo.hitWall) {
 		velocity_.x *= (1.0f - kAttenuationWall);
 	}
@@ -91,7 +89,7 @@ AABB Player::GetAABB() {
 void Player::OnCollision(const Enemy* enemy) {
 	(void)enemy;
 	// ジャンプ初速
-	velocity_ += Vector3(0, kJumpAcceleration / 60.0f, 0);
+	isDead_ = true;
 }
 
 void Player::InputMove() {
@@ -338,7 +336,6 @@ void Player::CheckMapCollisionLeft(CollisionMapInfo& info) {
 	MapChipType mapChipType;
 	MapChipType mapChipTypeNext;
 	bool hit = false;
-
 	// 左上点の判定
 	MapChipField::IndexSet indexSet;
 	indexSet = mapChipField_->GetMapChipIndexSetByPosition(positionsNew[kLeftTop]);
@@ -347,7 +344,6 @@ void Player::CheckMapCollisionLeft(CollisionMapInfo& info) {
 	if (mapChipType == MapChipType::kBlock && mapChipTypeNext != MapChipType::kBlock) {
 		hit = true;
 	}
-
 	// 左下点の判定
 	indexSet = mapChipField_->GetMapChipIndexSetByPosition(positionsNew[kLeftBottom]);
 	mapChipType = mapChipField_->GetMapChipTypeByIndex(indexSet.xIndex, indexSet.yIndex);

@@ -11,10 +11,9 @@ public:
 	void Draw();
 
 private:
-
+	
 	WorldTransform worldTransform_;
 	ViewProjection* viewProjection_ = nullptr;
 	
-
 	Model* model_ = nullptr;
 };

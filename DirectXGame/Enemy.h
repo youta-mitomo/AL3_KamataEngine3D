@@ -39,7 +39,7 @@ private:
 	static inline const float kHeight = 0.8f;
 
 	Model* model_ = nullptr;
-	
+
 	WorldTransform worldTransform_;
 
 	ViewProjection* viewProjection_ = nullptr;

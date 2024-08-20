@@ -42,6 +42,7 @@ void CameraController::Update() {
 
 	// 行列を更新する
 	viewProjection_.UpdateMatrix();
+
 }
 
 void CameraController::Reset() {
@@ -53,4 +54,5 @@ void CameraController::Reset() {
 	viewProjection_.translation_.x = targetWorldTransform.translation_.x + targetOffset_.x;
 	viewProjection_.translation_.y = targetWorldTransform.translation_.y + targetOffset_.y;
 	viewProjection_.translation_.z = targetWorldTransform.translation_.z + targetOffset_.z;
+	
 }
