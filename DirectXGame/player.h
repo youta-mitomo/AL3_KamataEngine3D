@@ -3,6 +3,7 @@
 #include "Model.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+
 class MapChipField;
 
 /// <summary>
@@ -12,9 +13,11 @@ class Player {
 public:
 	// 左右
 	enum class LRDirection {
+
 		kRight,
 		kLeft,
 	};
+
 
 	// 角
 	enum Corner {
@@ -22,7 +25,6 @@ public:
 		kLeftBottom,  // 左下
 		kRightTop,    // 右上
 		kLeftTop,     // 左上
-
 		kNumCorner // 要素数
 	};
 

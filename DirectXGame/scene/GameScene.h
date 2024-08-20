@@ -83,6 +83,7 @@ private: // メンバ変数
 
 	// 天球
 	Skydome* skydome_ = nullptr;
+
 	// 3Dモデル
 	Model* modelSkydome_ = nullptr;
 
