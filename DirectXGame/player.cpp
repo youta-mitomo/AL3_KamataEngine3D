@@ -19,6 +19,7 @@ void Player::Initialize(Model* model, ViewProjection* viewProjection, const Vect
 	// ワールド変換の初期化
 	worldTransform_.Initialize();
 	worldTransform_.translation_ = position;
+	
 	// 右を向かせる(πとか数値情報が定義されてる)
 	worldTransform_.rotation_.y = std::numbers::pi_v<float> / 2.0f;
 
@@ -37,7 +38,7 @@ void Player::Update() {
 	collisionMapInfo.move = velocity_;
 	collisionMapInfo.landing = false;
 	collisionMapInfo.hitWall = false;
-
+	
 	//マップ衝突判定
 	CheckMapCollision(collisionMapInfo);
 
@@ -173,7 +174,7 @@ void Player::CheckMapCollisionUp(CollisionMapInfo& info) {
 	if (mapChipType == MapChipType::kBlock && mapChipTypeNext != MapChipType::kBlock) {
 		hit = true;
 	}
-
+	
 	// ブロックにヒット？
 	if (hit) {
 		// 現在座標が壁の外か判定

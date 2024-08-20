@@ -11,6 +11,7 @@
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	WinApp* win = nullptr;
 	DirectXCommon* dxCommon = nullptr;
+	
 	// 汎用機能
 	Input* input = nullptr;
 	Audio* audio = nullptr;
@@ -93,6 +94,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		dxCommon->PostDraw();
 	}
 
+
+
+	
 	// 各種解放
 //	SafeDelete(gameScene);
 	audio->Finalize();

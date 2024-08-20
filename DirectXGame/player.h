@@ -17,6 +17,7 @@ public:
 		kRight,
 		kLeft,
 	};
+	
 
 	// 角
 	enum Corner {
@@ -75,6 +76,7 @@ private:
 
 	// モデル
 	Model* model_ = nullptr;
+
 	// ワールド変換データ
 	WorldTransform worldTransform_;
 	ViewProjection* viewProjection_ = nullptr;

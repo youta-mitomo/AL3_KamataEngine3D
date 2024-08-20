@@ -100,8 +100,7 @@ void GameScene::Update() {
 		// ビュープロジェクション行列の転送
 		viewProjection_.TransferMatrix();
 	} else {
-		// ビュープロジェクション行列の更新と転送
-		//		viewProjection_.UpdateMatrix();
+		
 		viewProjection_.matView = cameraController->GetViewProjection().matView;
 		viewProjection_.matProjection = cameraController->GetViewProjection().matProjection;
 		// ビュープロジェクションの転送
@@ -140,7 +139,7 @@ void GameScene::Draw() {
 #pragma region 背景スプライト描画
 	// 背景スプライト描画前処理
 	Sprite::PreDraw(commandList);
-
+	
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>

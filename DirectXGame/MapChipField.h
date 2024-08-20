@@ -22,7 +22,7 @@ public:
 		uint32_t xIndex;
 		uint32_t yIndex;
 	};
-
+	
 	struct Rect {
 		float left;   // 左端
 		float right;  // 右端
