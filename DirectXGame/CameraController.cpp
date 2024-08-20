@@ -34,6 +34,7 @@ void CameraController::Update() {
 	viewProjection_.translation_.y = std::clamp(
 	    viewProjection_.translation_.y, targetWorldTransform.translation_.y + targetMargin.bottom,
 	    targetWorldTransform.translation_.y + targetMargin.top);
+
 	// 移動範囲制限
 	viewProjection_.translation_.x =
 	    std::clamp(viewProjection_.translation_.x, movableArea_.left, movableArea_.right);
@@ -42,7 +43,6 @@ void CameraController::Update() {
 
 	// 行列を更新する
 	viewProjection_.UpdateMatrix();
-
 }
 
 void CameraController::Reset() {
@@ -54,5 +54,5 @@ void CameraController::Reset() {
 	viewProjection_.translation_.x = targetWorldTransform.translation_.x + targetOffset_.x;
 	viewProjection_.translation_.y = targetWorldTransform.translation_.y + targetOffset_.y;
 	viewProjection_.translation_.z = targetWorldTransform.translation_.z + targetOffset_.z;
-	
+
 }

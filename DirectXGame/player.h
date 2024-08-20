@@ -15,10 +15,8 @@ class Player {
 public:
 	// 左右
 	enum class LRDirection {
-
 		kRight,
 		kLeft,
-
 	};
 
 	// 角
@@ -27,6 +25,7 @@ public:
 		kLeftBottom,  // 左下
 		kRightTop,    // 右上
 		kLeftTop,     // 左上
+
 		kNumCorner // 要素数
 	};
 
@@ -59,7 +58,6 @@ public:
 	// getter
 	const WorldTransform& GetWorldTransform() const { return worldTransform_; }
 	const Vector3& GetVelocity() const { return velocity_; }
-
 	bool IsDead() const { return isDead_; };
 
 private:
@@ -88,21 +86,13 @@ private:
 	};
 
 	Model* model_ = nullptr;
-
 	WorldTransform worldTransform_;
-
 	ViewProjection* viewProjection_ = nullptr;
-
 	Vector3 velocity_ = {};
-
 	bool onGround_ = true;
-
 	LRDirection lrDirection_ = LRDirection::kRight;
-
 	float turnFirstRotationY_ = 0.0f;
-
 	float turnTimer_ = 0.0f;
-
 	MapChipField* mapChipField_ = nullptr;
 
 	void InputMove();

@@ -11,7 +11,6 @@ void Enemy::Initialize(Model* model, ViewProjection* viewProjection, const Vecto
 	worldTransform_.Initialize();
 	worldTransform_.translation_ = position;
 	worldTransform_.rotation_.y = std::numbers::pi_v<float> * 3.0f / 2.0f;
-
 	viewProjection_ = viewProjection;
 
 	velocity_ = {-kWalkSpeed, 0, 0};
@@ -33,7 +32,6 @@ void Enemy::Update() {
 
 void Enemy::Draw() {
 	// モデル描画
-
 	model_->Draw(worldTransform_, *viewProjection_);
 }
 
@@ -53,7 +51,6 @@ AABB Enemy::GetAABB() {
 
 	aabb.min = {
 	    worldPos.x - kWidth / 2.0f, worldPos.y - kHeight / 2.0f, worldPos.z - kWidth / 2.0f};
-	
 	aabb.max = {
 	    worldPos.x + kWidth / 2.0f, worldPos.y + kHeight / 2.0f, worldPos.z + kWidth / 2.0f};
 
