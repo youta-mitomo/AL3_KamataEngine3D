@@ -1,8 +1,9 @@
 #include "GameScene.h"
-#include "TextureManager.h"
 #include "myMath.h"
+#include "TextureManager.h"
 #include <cassert>
 #include <cstdint>
+
 
 GameScene::GameScene() {}
 
@@ -11,7 +12,6 @@ GameScene::~GameScene() {
 	delete deathParticles_;
 	for (Enemy* enemy : enemies_) {
 		delete enemy;
-
 	}
 	delete player_;
 	for (std::vector<WorldTransform*>& worldTransformBlockLine : worldTransformBlocks_) {
@@ -21,20 +21,12 @@ GameScene::~GameScene() {
 		}
 	}
 	delete modelDeathParticle_;
-
 	delete modelEnemy_;
-
 	delete modelPlayer_;
-
 	delete modelBlock_;
-
 	delete debugCamera_;
-
 	delete modelSkydome_;
-
-	//マップチップフィールドの解放
 	delete mapChipField_;
-
 	delete cameraController;
 }
 
@@ -46,7 +38,6 @@ void GameScene::Initialize() {
 
 	// ビュープロジェクションの初期化
 	viewProjection_.Initialize();
-
 
 	// 3Dモデルの生成
 	modelPlayer_ = Model::CreateFromOBJ("player");
@@ -117,8 +108,11 @@ void GameScene::Update() {
 		UpdateBlocks();
 
 		CheckAllCollisions();
-
+		break;
 	case Phase::kDeath:
+		if (deathParticles_ && deathParticles_->IsFinished()) {
+			finished_ = true;
+		}
 		worldTransformSkydome_.UpdateMatrix();
 
 		for (Enemy* enemy : enemies_) {
@@ -129,11 +123,11 @@ void GameScene::Update() {
 			deathParticles_->Update();
 		}
 
-
 		UpdateCamera();
 		break;
 	}
 }
+
 
 void GameScene::Draw() {
 	// コマンドリストの取得
@@ -177,13 +171,18 @@ void GameScene::Draw() {
 		player_->Draw();
 	}
 
+	//敵
 	for (Enemy* enemy : enemies_) {
 		enemy->Draw();
 	}
 
+	//パーティクル
 	if (deathParticles_) {
 		deathParticles_->Draw();
 	}
+
+
+
 
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
@@ -220,6 +219,34 @@ void GameScene::ChangePhase() {
 	case Phase::kDeath:
 
 		break;
+	}
+}
+
+void GameScene::GenerateBlocks() {
+
+	// 要素数
+	uint32_t numBlockVirtical = mapChipField_->GetNumBlockVirtical();
+	uint32_t numBlockHorizontal = mapChipField_->GetNumBlockHorizontal();
+
+	// 要素数を変更する
+	// 列数を設定 (縦方向のブロック数)
+	worldTransformBlocks_.resize(numBlockVirtical);
+	for (uint32_t i = 0; i < numBlockVirtical; ++i) {
+		// 1列の要素数を設定 (横方向のブロック数)
+		worldTransformBlocks_[i].resize(numBlockHorizontal);
+	}
+
+	// ブロックの生成
+	for (uint32_t i = 0; i < numBlockVirtical; ++i) {
+		for (uint32_t j = 0; j < numBlockHorizontal; ++j) {
+			if (mapChipField_->GetMapChipTypeByIndex(j, i) == MapChipType::kBlock) {
+				WorldTransform* worldTransform = new WorldTransform();
+				worldTransform->Initialize();
+				worldTransformBlocks_[i][j] = worldTransform;
+				worldTransformBlocks_[i][j]->translation_ =
+				    mapChipField_->GetMapChipPositionByIndex(j, i);
+			}
+		}
 	}
 }
 
@@ -284,32 +311,4 @@ void GameScene::CheckAllCollisions() {
 		}
 	}
 #pragma endregion
-}
-
-void GameScene::GenerateBlocks() {
-
-	// 要素数
-	uint32_t numBlockVirtical = mapChipField_->GetNumBlockVirtical();
-	uint32_t numBlockHorizontal = mapChipField_->GetNumBlockHorizontal();
-
-	// 要素数を変更する
-	// 列数を設定 (縦方向のブロック数)
-	worldTransformBlocks_.resize(numBlockVirtical);
-	for (uint32_t i = 0; i < numBlockVirtical; ++i) {
-		// 1列の要素数を設定 (横方向のブロック数)
-		worldTransformBlocks_[i].resize(numBlockHorizontal);
-	}
-
-	// ブロックの生成
-	for (uint32_t i = 0; i < numBlockVirtical; ++i) {
-		for (uint32_t j = 0; j < numBlockHorizontal; ++j) {
-			if (mapChipField_->GetMapChipTypeByIndex(j, i) == MapChipType::kBlock) {
-				WorldTransform* worldTransform = new WorldTransform();
-				worldTransform->Initialize();
-				worldTransformBlocks_[i][j] = worldTransform;
-				worldTransformBlocks_[i][j]->translation_ =
-				    mapChipField_->GetMapChipPositionByIndex(j, i);
-			}
-		}
-	}
 }
