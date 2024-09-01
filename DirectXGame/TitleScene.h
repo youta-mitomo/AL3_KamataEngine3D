@@ -5,6 +5,7 @@
 #include "WorldTransform.h"
 
 class TitleScene {
+
 public:
 	~TitleScene();
 

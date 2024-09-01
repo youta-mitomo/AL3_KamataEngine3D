@@ -81,6 +81,7 @@ private: // メンバ変数
 	DebugCamera* debugCamera_ = nullptr;
 	// デバッグカメラ有効
 	bool isDebugCameraActive_ = false;
+
 	// マップチップフィールド
 	MapChipField* mapChipField_;
 	CameraController* cameraController = nullptr;

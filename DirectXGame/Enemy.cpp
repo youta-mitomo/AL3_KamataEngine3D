@@ -31,11 +31,13 @@ void Enemy::Update() {
 }
 
 void Enemy::Draw() {
+
 	// モデル描画
 	model_->Draw(worldTransform_, *viewProjection_);
 }
 
 Vector3 Enemy::GetWorldPosition() {
+
 	Vector3 worldPos;
 	// ワールド行列の平行移動成分を取得(ワールド座標)
 	worldPos.x = worldTransform_.matWorld_.m[3][0];

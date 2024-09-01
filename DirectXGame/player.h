@@ -12,6 +12,7 @@ class Enemy;
 /// 自キャラ
 /// </summary>
 class Player {
+
 public:
 	// 左右
 	enum class LRDirection {

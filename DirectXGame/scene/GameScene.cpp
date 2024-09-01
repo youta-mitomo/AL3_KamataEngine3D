@@ -84,6 +84,9 @@ void GameScene::Initialize() {
 	enemies_.push_back(newEnemy_);
 
 	phase_ = Phase::kPlay;
+
+	
+	
 }
 
 void GameScene::Update() {
@@ -284,6 +287,7 @@ void GameScene::UpdateBlocks() {
 			worldTransformBlock->UpdateMatrix();
 		}
 	}
+	
 }
 
 void GameScene::CheckAllCollisions() {
@@ -312,3 +316,4 @@ void GameScene::CheckAllCollisions() {
 	}
 #pragma endregion
 }
+

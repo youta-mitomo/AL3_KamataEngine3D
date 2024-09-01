@@ -6,13 +6,14 @@
 #include <cmath>
 #include <numbers>
 
-TitleScene::~TitleScene() {
+TitleScene::~TitleScene() { 
 	delete modelTitle_;
 	delete modelPlayer_;
 }
 
 void TitleScene::Initialize() {
-	modelTitle_ = Model::CreateFromOBJ("titleFont", true);
+	modelTitle_ = Model::CreateFromOBJ("text", true); 
+
 	modelPlayer_ = Model::CreateFromOBJ("player");
 	// ビュープロジェクションの初期化
 	viewProjection_.Initialize();
@@ -45,7 +46,7 @@ void TitleScene::Update() {
 	worldTransformPlayer_.UpdateMatrix();
 }
 
-void TitleScene::Draw() {
+void TitleScene::Draw() { 
 	DirectXCommon* dxCommon_ = DirectXCommon::GetInstance();
 	// コマンドリストの取得
 	ID3D12GraphicsCommandList* commandList = dxCommon_->GetCommandList();

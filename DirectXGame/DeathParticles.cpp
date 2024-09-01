@@ -4,6 +4,7 @@
 #include "myMath.h"
 #include <cassert>
 
+
 void DeathParticles::Initialize(
     Model* model, ViewProjection* viewProjection, const Vector3& position) {
 	// NULLポインタチェック
@@ -38,6 +39,7 @@ void DeathParticles::Update() {
 
 	for (auto& worldTransform : worldTransforms_) {
 		worldTransform.UpdateMatrix();
+
 	}
 
 }

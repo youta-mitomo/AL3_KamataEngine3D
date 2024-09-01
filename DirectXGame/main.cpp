@@ -25,6 +25,7 @@ void ChangeScene() {
 	switch (scene) {
 	case Scene::kTitle:
 		if (titleScene->IsFinished()) {
+
 			// シーン変更
 			scene = Scene::kGame;
 			// 旧シーンの解放
@@ -52,6 +53,7 @@ void ChangeScene() {
 }
 	void UpdateScene() {
 	  switch (scene) {
+
 	     case Scene::kTitle:
 		titleScene->Update();
 		break;

@@ -144,7 +144,7 @@ void Player::InputMove() {
 		if (std::abs(velocity_.x) <= 0.0001f) {
 			velocity_.x = 0.0f;
 		}
-		if (Input::GetInstance()->PushKey(DIK_UP)) {
+		if (Input::GetInstance()->PushKey(DIK_DOWN)) {
 			// ジャンプ初速
 			velocity_ += Vector3(0, kJumpAcceleration / 60.0f, 0);
 		}
@@ -165,6 +165,7 @@ void Player::CheckMapCollision(CollisionMapInfo& info) {
 }
 
 void Player::CheckMapCollisionUp(CollisionMapInfo& info) {
+
 	// 上昇あり？
 	if (info.move.y <= 0) {
 		return;

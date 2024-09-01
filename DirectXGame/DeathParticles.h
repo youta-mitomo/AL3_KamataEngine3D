@@ -8,6 +8,7 @@
 
 class DeathParticles {
 public:
+
 	void Initialize(Model* model, ViewProjection* viewProjection, const Vector3& position);
 
 	void Update();
@@ -17,6 +18,7 @@ public:
 	bool IsFinished() const { return isFinished_; };
 
 private:
+
 	static inline const uint32_t kNumParticles = 8;
 	static inline const float kDuration = 2.0f;
 	static inline const float kSpeed = 0.05f;

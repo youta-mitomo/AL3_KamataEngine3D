@@ -88,6 +88,7 @@ Matrix4x4 Multiply(const Matrix4x4& m1, const Matrix4x4& m2) {
 }
 
 Vector3& operator+=(Vector3& lhv, const Vector3& rhv) {
+
 	lhv.x += rhv.x;
 	lhv.y += rhv.y;
 	lhv.z += rhv.z;
@@ -95,6 +96,7 @@ Vector3& operator+=(Vector3& lhv, const Vector3& rhv) {
 }
 
 Vector3& operator-=(Vector3& lhv, const Vector3& rhv) {
+
 	lhv.x -= rhv.x;
 	lhv.y -= rhv.y;
 	lhv.z -= rhv.z;
@@ -102,6 +104,7 @@ Vector3& operator-=(Vector3& lhv, const Vector3& rhv) {
 }
 
 Vector3& operator*=(Vector3& v, float s) {
+
 	v.x *= s;
 	v.y *= s;
 	v.z *= s;
@@ -109,6 +112,7 @@ Vector3& operator*=(Vector3& v, float s) {
 }
 
 Vector3& operator/=(Vector3& v, float s) {
+
 	v.x /= s;
 	v.y /= s;
 	v.z /= s;
@@ -116,16 +120,19 @@ Vector3& operator/=(Vector3& v, float s) {
 }
 
 const Vector3 operator+(const Vector3& v1, const Vector3& v2) {
+
 	Vector3 temp(v1);
 	return temp += v2;
 }
 
 const Vector3 operator-(const Vector3& v1, const Vector3& v2) {
+
 	Vector3 temp(v1);
 	return temp -= v2;
 }
 
 const Vector3 operator*(const Vector3& v, float s) {
+
 	Vector3 temp(v);
 	return temp *= s;
 }
@@ -133,6 +140,7 @@ const Vector3 operator*(const Vector3& v, float s) {
 const Vector3 operator*(float s, const Vector3& v) { return v * s; }
 
 const Vector3 operator/(const Vector3& v, float s) {
+
 	Vector3 temp(v);
 	return temp /= s;
 }
