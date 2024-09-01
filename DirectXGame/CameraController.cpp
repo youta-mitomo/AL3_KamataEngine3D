@@ -38,6 +38,7 @@ void CameraController::Update() {
 	// 移動範囲制限
 	viewProjection_.translation_.x =
 	    std::clamp(viewProjection_.translation_.x, movableArea_.left, movableArea_.right);
+
 	viewProjection_.translation_.y =
 	    std::clamp(viewProjection_.translation_.y, movableArea_.bottom, movableArea_.top);
 

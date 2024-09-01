@@ -29,4 +29,5 @@ private:
 	float counter_ = 0.0f;
 	//ObjectColor objectColor_;
 	//Vector4 color_;
+
 };

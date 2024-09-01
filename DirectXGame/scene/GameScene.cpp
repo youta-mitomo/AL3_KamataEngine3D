@@ -11,11 +11,13 @@ GameScene::~GameScene() {
 
 	delete deathParticles_;
 	for (Enemy* enemy : enemies_) {
+
 		delete enemy;
 	}
 	delete player_;
 	for (std::vector<WorldTransform*>& worldTransformBlockLine : worldTransformBlocks_) {
 		for (WorldTransform* worldTransformBlock : worldTransformBlockLine) {
+
 			delete worldTransformBlock;
 			worldTransformBlock = nullptr;
 		}

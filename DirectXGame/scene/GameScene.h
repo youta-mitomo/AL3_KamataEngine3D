@@ -105,4 +105,5 @@ private: // メンバ変数
 	// 衝突判定と応答
 
 	void CheckAllCollisions();
+
 };

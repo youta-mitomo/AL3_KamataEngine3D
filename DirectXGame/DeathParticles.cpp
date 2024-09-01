@@ -37,6 +37,7 @@ void DeathParticles::Update() {
 	}
 
 	for (auto& worldTransform : worldTransforms_) {
+
 		worldTransform.UpdateMatrix();
 	}
 

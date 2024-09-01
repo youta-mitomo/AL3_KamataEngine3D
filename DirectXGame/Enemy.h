@@ -38,4 +38,5 @@ private:
 	ViewProjection* viewProjection_ = nullptr;
 	Vector3 velocity_ = {};
 	float walkTimer = 0.0f;
+
 };

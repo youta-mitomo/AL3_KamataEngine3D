@@ -74,6 +74,7 @@ private:
 	static inline const float kHeight = 0.8f;
 	static inline const float kBlank = 0.04f;
 	static inline const float kGroundSearchHeight = 0.06f;
+
 	bool isDead_ = false;
 
 
@@ -105,4 +106,5 @@ private:
 	void AnimateTurn();
 
 	Vector3 CornerPosition(const Vector3& center, Corner corner);
+
 };

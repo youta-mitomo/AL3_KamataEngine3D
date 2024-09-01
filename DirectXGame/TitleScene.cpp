@@ -15,6 +15,7 @@ void TitleScene::Initialize() {
 	modelTitle_ = Model::CreateFromOBJ("titleFont", true);
 	modelPlayer_ = Model::CreateFromOBJ("player");
 	// ビュープロジェクションの初期化
+
 	viewProjection_.Initialize();
 
 	const float kPlayerScale = 10.0f;

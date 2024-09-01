@@ -6,6 +6,7 @@
 
 class TitleScene {
 public:
+
 	~TitleScene();
 
 	void Initialize();
@@ -17,6 +18,7 @@ public:
 	bool IsFinished() const { return finished_; }
 
 private:
+
 	static inline const float kTimeTitleMove = 2.0f;
 
 	ViewProjection viewProjection_;
@@ -28,4 +30,5 @@ private:
 
 	float counter_ = 0.0f;
 	bool finished_ = false;
+
 };
