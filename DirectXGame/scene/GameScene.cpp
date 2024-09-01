@@ -145,9 +145,11 @@ void GameScene::Draw() {
 
 	// ラインを描画する
 	PrimitiveDrawer::GetInstance()->DrawLine3d({0, 0, 0}, {0, 10, 0}, {1.0f, 0.0f, 0.0f, 1.0f});
+
 #pragma endregion
 
-#pragma region 前景スプライト描画
+#pragma region 
+
 	// 前景スプライト描画前処理
 	Sprite::PreDraw(commandList);
 
